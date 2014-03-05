@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.crkstm.mnenia" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Hello Cordova</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="App">
+        <param name="android-package" value="org.apache.cordova.App" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <name>Mnenia</name>
+    <description>
+        Mnenia app. Makes shit.
+    </description>
+    <author email="crackercrc@gmail.com" href="http://vk.com/crrracker">
+        Daniel Polovinkin
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>

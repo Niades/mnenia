@@ -1,0 +1,22 @@
+D:\ADT\cordova\mnenia\platforms\android\bin\classes.dex : \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\com\crkstm\mnenia\BuildConfig.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\com\crkstm\mnenia\Mnenia.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\com\crkstm\mnenia\R$attr.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\com\crkstm\mnenia\R$drawable.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\com\crkstm\mnenia\R$string.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\com\crkstm\mnenia\R$xml.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\com\crkstm\mnenia\R.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$1.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$2.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$3.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$4.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$5$1.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$5$2.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$5$3.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$5$4.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$5$5.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$5.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser$InAppBrowserClient.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppBrowser.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\classes\org\apache\cordova\inappbrowser\InAppChromeClient.class \
+D:\ADT\cordova\mnenia\platforms\android\bin\dexedLibs\classes-03439ac613a6dca0acdc7096737c3b42.jar \
