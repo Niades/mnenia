@@ -4,9 +4,6 @@
     <description>
         Mnenia app. Makes shit.
     </description>
-    <author email="crackercrc@gmail.com" href="http://vk.com/crrracker">
-        Daniel Polovinkin
-    </author>
     <content src="index.html" />
     <access origin="*" />
 </widget>

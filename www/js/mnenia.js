@@ -8,7 +8,8 @@
 	var people = {},
 		queue = [],
 		qIndex = 0,
-		events = {};
+		events = {},
+		menuActive = false;
 	function emitEvent(eventName, args) {
         var event = events[eventName], i = 0;
 		if(typeof(event)!=='undefined') {
@@ -129,6 +130,11 @@
 			ServerApi.api('submit_opinion', {"qid" : person.question.id, "text" : text, "user_id" : person.id }, function() {
 				l('opinion submitted.');
 			});
+		},
+		toggleMenu : function() {
+			//updateMenu();
+			menuActive = !menuActive;
+			emitEvent('menutoggle', menuActive);
 		}
 	};
 	window.App = App;

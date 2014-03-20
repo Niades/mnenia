@@ -1,22 +1,49 @@
 body {
-	text-align: center;
+    text-align: center;
+    font-family: sans-serif;
+}
+.content-holder {
+	position: absolute;
+	left: -150px;
+}
+.header {
+	position: relative;
+}
+.header-left {
+	position: absolute;
+	left: 1em;
+}
+.menu-button {
+	cursor: pointer;
+	font-size: 2em;
+}
+.screens {
+	/*Something bad happens here*/
+	margin-left: 150px;
+}
+.menu {
+	float: left;
+	width: 150px;
+	background: #000;
+	color: #fff;
 }
 .photo {
-	width: 300px;
-	height: 300px;
-	background-position: center center;
-	background-repeat: no-repeat;
-	margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    border: 1px solid #cdc;
 }
 .opinion-input {
-	width: 100%;
-	margin: 5px;
+    width: 100%;
+    margin: 5px;
 }
 
 .button {
-	display: inline;
-	padding: 3px 5px;
-	border: 1px solid #000;
-	margin: 5px;
-	cursor: pointer;
+    display: inline;
+    padding: 3px 5px;
+    border: 1px solid #000;
+    margin: 5px;
+    cursor: pointer;
 }

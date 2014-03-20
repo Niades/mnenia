@@ -5,7 +5,7 @@
 		STANDALONE_REDIRECT_URI = 'https://oauth.vk.com/blank.html',
 		API_VERSION = '5.8';
 	
-	var accessToken = '49a81196aaad68d4801140896705d3decf5e951d016f0552285bd868f374c1fdca3a94a90baf494a0fef8',
+	var accessToken = '3990cb106bc2fb81537e5102024b2550800a21fd9cd5a86647c6131e159b6bdcddd532c1afabf0aed1f08',
 		userId = '184868738';
 	
 	function l(m) {
