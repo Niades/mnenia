@@ -27,6 +27,9 @@
 					☰
 				</div>
 			</div>
+			<div class="header-right">
+				$100
+			</div>
 		</div>
 		<h1 class="question">
 				Ти что пидор)
@@ -55,13 +58,7 @@
 			function l(m) {
 				_l('index.html', m);
 			}
-			$('#button-submit').on('click', function() {
-				App.submitOpinion($('input.opinion-input').val());
-				App.next();
-			});
-			$('#button-next').on('click', function() {
-				App.next();
-			});
+
             //VK.auth('4147892', 'friends,photos', 'mobile', function() {
             App.on('mainready', function(person) {
             	$('.question').text(person.question.text);
@@ -71,7 +68,7 @@
             	if(isactive) {
             		$('.content-holder').animate({'left':'0'});
             	} else {
-					$('.content-holder').animate({'left':'-33%'});
+					$('.content-holder').animate({'left':'-87.91666666666667%'});
             	}
             });
 			App.initialize(VK.getUserId());
@@ -82,9 +79,15 @@
 		}
 
 		function onDocumentReady() {
-			var menuActive = false;
 			$('.menu-button').on('click', function() {
 				App.toggleMenu();
+			});
+			$('#button-submit').on('click', function() {
+				App.submitOpinion($('input.opinion-input').val());
+				App.next();
+			});
+			$('#button-next').on('click', function() {
+				App.next();
 			});
 		}
 

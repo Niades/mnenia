@@ -3,37 +3,48 @@ body {
     font-family: sans-serif;
     margin: 0;
 }
+
 .content-holder {
 	position: absolute;
-	width: 133%;
-	left: -33%;
+	width: 187.91666666666667%;
+	left: -87.91666666666667%;
+	background: #000;
 }
+
 .header {
 	position: relative;
 	height: 3em;
+	background: #5580B5;
+	color: #ffffff;
+	font-size: 1em;
 }
+
 .header-left {
 	position: absolute;
 	left: 1em;
 	top: 1em;
+}
 
+.header-right {
+	position: absolute;
+	right: 1em;
+	top: 1em;
 }
-.menu-active {
-	left: ;
-}
+
 .menu-button {
 	cursor: pointer;
-	font-size: 1em;
 }
+
 .screens {
 	/*Something bad happens here*/
-	width: 75.23510971786834%;
-	margin-left: 24.76489028213166%;
+	width: 53.21507760532151%;
+	margin-left: 46.78492239467849%;
+	background: #fff;
 }
+
 .menu {
 	float: left;
-	width: 24.76489028213166%;
-	background: #000;
+	width: 46.78492239467849%;
 	color: #fff;
 }
 .photo {
@@ -44,6 +55,7 @@ body {
     margin: 0 auto;
     border: 1px solid #cdc;
 }
+
 .opinion-input {
     width: 100%;
     margin: 5px;
