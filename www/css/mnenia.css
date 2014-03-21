@@ -1,29 +1,38 @@
 body {
     text-align: center;
     font-family: sans-serif;
+    margin: 0;
 }
 .content-holder {
 	position: absolute;
-	left: -150px;
+	width: 133%;
+	left: -33%;
 }
 .header {
 	position: relative;
+	height: 3em;
 }
 .header-left {
 	position: absolute;
 	left: 1em;
+	top: 1em;
+
+}
+.menu-active {
+	left: ;
 }
 .menu-button {
 	cursor: pointer;
-	font-size: 2em;
+	font-size: 1em;
 }
 .screens {
 	/*Something bad happens here*/
-	margin-left: 150px;
+	width: 75.23510971786834%;
+	margin-left: 24.76489028213166%;
 }
 .menu {
 	float: left;
-	width: 150px;
+	width: 24.76489028213166%;
 	background: #000;
 	color: #fff;
 }

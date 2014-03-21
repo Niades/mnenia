@@ -69,9 +69,9 @@
             });
             App.on('menutoggle', function(isactive) {
             	if(isactive) {
-            		$('.content-holder').animate({'left':0});
+            		$('.content-holder').animate({'left':'0'});
             	} else {
-					$('.content-holder').animate({'left':-150});
+					$('.content-holder').animate({'left':'-33%'});
             	}
             });
 			App.initialize(VK.getUserId());
