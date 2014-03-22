@@ -109,7 +109,10 @@
 //			return
 //		},
 		showProfile : function(userId) {
-
+			var person = people[userId];
+			DataLoader.loadMissing(person, ['question', 'opinions'], function() {
+				emitEvent('renderprofile', person);
+			});
 		},
 		next : function() {
 			qIndex += 1;

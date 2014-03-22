@@ -133,6 +133,7 @@
             App.on('mainready', function(person) {
             	$('.question').text(person.question.text);
             	$('.photo').css('background-image', 'url(' + person.photo_large + ')');
+            				App.showProfile(197515742);
             });
             App.on('menutoggle', function(isactive) {
             	if(isactive) {
@@ -141,6 +142,37 @@
 					$('.content-holder').animate({'left':'-87.91666666666667%'});
             	}
             });
+            App.on('renderprofile', function(profile) {
+            	l('rendering profile for user with id = ' + profile.photo_200);
+            	$('.user-pic').find('img').attr('src', profile.photo_200);
+            	$('.user-info').find('h2').text(profile.first_name + ' ' + profile.last_name);
+            	$('.user-question').text(profile.question.text);
+            	$('.user-opinions-count').html(sformat('<strong>{{0}}</strong> мнений', profile.opinions.count));
+            	//This seemss like overoptimized to me
+            	var questions = profile.opinions.items,
+            		question = null,
+            		opinions = null,
+            		opinion = null,
+            		html = '';
+            	for(var i in questions) {
+            		if(typeof(questions[i])!='function') {
+            			//What the fuck am I doing seriously
+            			question = questions[i];
+            			//This should probably be replaced using ejs
+            			html += sformat('<div class="opinion-question"><span>{{0}}</span>', question.text);
+            			opinions = question.opinions;
+            			for(var j in opinions) {
+            				if(typeof(opinions[j])!='function') {
+            					opinion = opinions[j];
+            					//same 
+            					html += sformat('<div class="opinion"><div class="opinion-character">:)</div><p>{{0}}</p></div>', opinion.text);
+            				}
+            			}
+            			html += '</div>';
+            		}
+            	}
+            	$('.user-opinion-list').html(html);
+            }) ;
             App.on('screenupdate', function(id) {
             	$('.screen').css('z-index', 0);
             	$('#' + id).css('z-index', 99);
@@ -164,6 +196,7 @@
 				App.next();
 			});
 			showScreen('profile');
+
 		}
 
 		function showScreen(id) {
