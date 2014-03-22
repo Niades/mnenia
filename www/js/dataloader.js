@@ -46,6 +46,8 @@
 						}
 					}	
 				}
+			} else {
+				callback(object);
 			}
 		},
 		checkFields : function(object, fields) {
