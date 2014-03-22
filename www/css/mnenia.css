@@ -1,15 +1,62 @@
+/* Common */
+
 body, h1, h2 {
     text-align: center;
     font-family: sans-serif;
     margin: 0;
+    overflow: hidden;
+}
+
+p {
+	margin: 1em 0;
 }
 
 .content-holder {
 	position: absolute;
 	width: 187.91666666666667%;
 	left: -87.91666666666667%;
+
+}
+.screens {
+	position: relative;
+	overflow: hidden;
+	height: 1000px;
+	/*Something bad happens here*/
+	width: 53.21507760532151%;
+	margin-left: 46.78492239467849%;
+	background: #fff;
+}
+
+.screen {
+
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: white;
+}
+
+.menu {
+	float: left;
+	width: 46.78492239467849%;
+	color: #fff;
 	background: #000;
 }
+
+.separator {
+	display: block;
+	background: #dadada;
+	height: 1px;
+}
+
+.clearfix {
+	display: block;
+	content: '.';
+	visibility: hidden;
+	clear: both;
+}
+
+/* Header */
 
 .header {
 	position: relative;
@@ -35,18 +82,8 @@ body, h1, h2 {
 	cursor: pointer;
 }
 
-.screens {
-	/*Something bad happens here*/
-	width: 53.21507760532151%;
-	margin-left: 46.78492239467849%;
-	background: #fff;
-}
+/* Queue screen */
 
-.menu {
-	float: left;
-	width: 46.78492239467849%;
-	color: #fff;
-}
 .photo {
     width: 300px;
     height: 300px;
@@ -69,6 +106,8 @@ body, h1, h2 {
     cursor: pointer;
 }
 
+/* Menu */
+
 .menu ul {
 	text-align: left;
 	font-size: 1.5em;
@@ -82,10 +121,11 @@ body, h1, h2 {
 	cursor: pointer;
 }
 
-.menu li:hover {
+.menu li:hover, .menu li.active {
 	color: #000;
 	background-color: #fff;
 }
+
 
 .profile-info {
 	margin: 1em;
@@ -112,4 +152,82 @@ body, h1, h2 {
 
 .profile-name span {
 	font-size: 0.9em;
+}
+
+/* Profile screen */
+
+.user-info {
+	padding: 1em;
+}
+
+.user-info h2 {
+	margin-top: 1em;
+}
+
+.user-pic {
+	margin: 0 auto;
+	width: 27.77777777777778%;
+}
+
+.user-pic img {
+	max-width: 100%;
+}
+
+.user-question {
+	padding: 0.5em;
+}
+
+.user-opinions-info {
+	padding: 0.5em;
+}
+
+.user-opinions-count {
+	float: left;
+}
+
+.user-opinions-character {
+	float: right;
+}
+
+.user-opinions-character div {
+	display: inline-block;
+}
+
+.positive-opinions strong {
+	color: #00ff00;
+}
+
+.negative-opinions strong {
+	color: #ff0000;
+}
+
+.opinion-question {
+	text-align: left;
+	padding: 0 0.5em;
+
+}
+
+.opinion-question span {
+	display: block;
+	color: #9f9f9f;
+	margin: 0.25em;
+}
+
+.opinion {
+	border-top: 1px solid #dadada;
+	position: relative;
+	padding: 0 0.5em 0.5em 0;
+}
+
+.opinion p {
+	text-align: justify;
+	text-indent: 1em;
+}
+
+.opinion-character {
+	position: absolute;
+	right: 0.5em;
+	bottom: 0.5em;
+	font-weight: bold;
+	color: #00ff00;
 }

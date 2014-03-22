@@ -21,7 +21,8 @@
 				</div>
 			</div>
 			<ul>
-				<li>Делись мнениями</li>
+				<li class="active">Делись мнениями</li>
+				<li>Мнения обо мне</li>
 				<li>Друзья</li>
 				<li>Мои мнения</li>
 				<li>Магазин</li>
@@ -29,26 +30,85 @@
 			</ul>
 		</div>
 		<div class="screens">
-		<div class="main">
-		<div class="header">
-			<div class="header-left">
-				<div class="menu-button">
-					☰
+		<div id="profile" class="screen">
+			<div class="header">
+				<div class="header-left">
+					<div class="menu-button">
+						☰
+					</div>
+				</div>
+				<div class="header-right">
+					$100
 				</div>
 			</div>
-			<div class="header-right">
-				$100
+			<div class="content">
+				<div class="user-info">
+					<div class="user-pic">
+						<img src="http://cs416928.vk.me/v416928742/90b3/nP4n9Z3rkBg.jpg"></img>
+					</div>
+					<h2>Виталька Юпитеров</h2>
+				</div>
+				<div class="separator"></div>
+				<div class="user-question">
+					Как твои дела?
+				</div>
+				<div class="separator"></div>
+				<div class="user-opinions-info">
+					<div class="user-opinions-count">
+						<strong>40</strong> мнений 
+					</div>
+					<div class="user-opinions-character">
+						<div class="positive-opinions">
+							<strong>:)</strong> 25
+						</div>
+						<div class="negative-opinions">
+							<strong>:(</strong> 1
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="separator"></div>
+				<div class="user-opinion-list">
+					<div class="opinion-question">
+						<span>- Как твои дела? </span>
+						<div class="opinion">
+							<div class="opinion-character">
+								:)
+							</div>
+							<p>    Я думаю што ты ниплахой паринь и фильмы тваи мне нравяця так то)))
+будь таким нормальным всигда кароч воооот) не знаю чо ещё сказать будь здоровь там не балей тип)</p>
+						</div>
+						<div class="opinion">
+							<div class="opinion-character">
+								:)
+							</div>
+							<p>    Я думаю што ты ниплахой паринь и фильмы тваи мне нравяця так то)))
+будь таким нормальным всигда кароч воооот) не знаю чо ещё сказать будь здоровь там не балей тип)</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<h1 class="question">
+		<div class="screen queue">
+			<div class="header">
+				<div class="header-left">
+					<div class="menu-button">
+						☰
+					</div>
+				</div>
+				<div class="header-right">
+					$100
+				</div>
+			</div>
+			<h1 class="question">
 				Ти что пидор)
-		</h1>
-		<div class="content">
-			<div class="photo"></div>
-			<input type="text" class="opinion-input">
-			<div id="button-submit" class="button">Ок отправить пидору)</div>
-			<div id="button-next" class="button">сук чё за хуила давай некст</div>
-		</div>
+			</h1>
+			<div class="content">
+				<div class="photo"></div>
+				<input type="text" class="opinion-input">
+				<div id="button-submit" class="button">Ок отправить пидору)</div>
+				<div id="button-next" class="button">сук чё за хуила давай некст</div>
+			</div>
 		</div>
 		</div>
 	</div>
@@ -80,6 +140,10 @@
 					$('.content-holder').animate({'left':'-87.91666666666667%'});
             	}
             });
+            App.on('screenupdate', function(id) {
+            	$('.screen').css('z-index', 0);
+            	$('#' + id).css('z-index', 99);
+            });
 			App.initialize(VK.getUserId());
 				//VKApi.getFriends(function(data) {
 				//	console.log(data);
@@ -98,6 +162,12 @@
 			$('#button-next').on('click', function() {
 				App.next();
 			});
+			showScreen('profile');
+		}
+
+		function showScreen(id) {
+				$('.screen').css('z-index', 0);
+            	$('#' + id).css('z-index', 99);
 		}
 
         </script>
