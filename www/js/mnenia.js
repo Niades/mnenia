@@ -18,19 +18,21 @@
 			}
 		}
     }
-    function getQuestion(userId, callback) {
-    	l('called getQuestion on user ' + userId);
-    	ServerApi.api('get_question', {'user_id':userId}, function(data) {
-    		l('hello from callback for user ' + userId);
-    		var r = data.response;
-    		people[userId].question = {'id' : r.id, 'text' : r.text};
-			l('User id'+userId + ' has question.text=' + r.text);
-			if(typeof(callback)!='undefined') {
-				callback(userId);
-			}
-    	});
-    }
-	function getLargePhoto(userId, callback) {
+
+    DataLoader.init({
+    	"question" : function(user, callback) {
+    		var fieldName = 'question',
+    		    userId = user.id;
+    		ServerApi.api('get_question', {'user_id':userId}, function(data) {
+    			var r = data.response;
+    			people[userId].question = {'id' : r.id, 'text' : r.text};
+				l('User id'+userId + ' has question.text=' + r.text);
+				callback(fieldName);
+    		});
+    	},
+    	"photo_large" : function(user, callback) {
+    		var fieldName = 'photo_large',
+    			userId = user.id;
 		VKApi.getProfilePhotos(userId, function(data) {
 			var r = data.response,
 				photo_large = '';
@@ -46,27 +48,9 @@
 			}
 			people[userId].photo_large = photo_large;
 			l('User id'+userId + ' has photo_large=' + photo_large);
-			if(typeof(callback)!='undefined') {
-				callback(userId);
-			}
+			callback(fieldName);
 		});
-	}
-	function checkPerson(userId, callback) {
-		var person = people[userId];
-		function _callback() {
-			if((typeof(person.photo_large)!='undefined')&&(typeof(person.question)!='undefined')) {
-				callback();
-			}
-		}
-		if(typeof(person.photo_large)=='undefined') {
-			getLargePhoto(userId, callback);
-		} 
-		if(typeof(person.question)=='undefined') {
-			getQuestion(userId, callback);
-		}
-		if((typeof(person.photo_large)!='undefined')&&(typeof(person.question)!='undefined')) 
-			callback(userId);
-	}
+	}});
 	function onQueueForward() {
 		var personId = 0,
 			person = null;
@@ -74,15 +58,15 @@
 			to = to >= queue.length ? queue.length : to;
 		l('Queue moved forward');
 		l('About to process ' + (to - qIndex) + ' users');
-		function _callback(userId) {
-			if(queue[qIndex]==userId) {
-				emitEvent('mainready', people[userId]);
+		function _callback(user) {
+			if(queue[qIndex]==user.id) {
+				emitEvent('mainready', people[user.id]);
 			}
 		}
 		for(var i=qIndex; i<to; i++) {
 			personId = queue[i];
 			l('Current user: ' + personId);
-			checkPerson(personId, _callback);
+			DataLoader.loadMissing(people[personId], ['question', 'photo_large'], _callback);
 		}
 	}
 	var App = {
@@ -112,6 +96,9 @@
 //		getCurrentPerson : function() {
 //			return
 //		},
+		showProfile : function(userId) {
+
+		},
 		next : function() {
 			qIndex += 1;
 			if(qIndex >= queue.length) {
