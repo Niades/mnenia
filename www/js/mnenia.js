@@ -92,6 +92,9 @@
 			ServerApi.auth(userId, function() {
 				VKApi.getSelfInfo(function(data) {
 					 var self = data.response[0];
+					 if(typeof(self.photo_200)=='undefined') {
+					 	self.photo_200 = self.photo_200_orig;
+					 }
 					 people[self.id] = self;
 					 emitEvent('renderself', self);
 				});
@@ -102,6 +105,9 @@
 					    i = 0;
 					for(; i<length; i++) {
 						f = r.items[i];
+						if(typeof(f.photo_200)=='undefined') {
+							f.photo_200 = f.photo_200_orig;
+						}
 						people[f.id] =  f;
 						queue.push(f.id);
 					}

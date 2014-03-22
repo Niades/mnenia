@@ -91,6 +91,7 @@ p {
     background-repeat: no-repeat;
     margin: 0 auto;
     border: 1px solid #cdc;
+    cursor: pointer;
 }
 
 .opinion-input {

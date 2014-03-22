@@ -2,7 +2,7 @@
     'use strict';
     //photo_200 is not returned when no userpic is available for this user
     //use photo_200_orig instead
-    var FRIENDS_FIELDS = "photo_50,photo_100,photo_200,sex,bdate,city",
+    var FRIENDS_FIELDS = "photo_50,photo_100,photo_200,photo_200_orig,sex,bdate,city",
         OWNER_FRIENDS_PARAMS = {
             "order" : "hints",
             "name_case" : "nom",
