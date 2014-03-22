@@ -25,8 +25,8 @@
     		    userId = user.id;
     		ServerApi.api('get_question', {'user_id':userId}, function(data) {
     			var r = data.response;
-    			people[userId].question = {'id' : r.id, 'text' : r.text};
-				l('User id'+userId + ' has question.text=' + r.text);
+    			user.question = {'id' : r.id, 'text' : r.text};
+
 				callback(fieldName);
     		});
     	},
@@ -46,8 +46,7 @@
 					}
 				}
 			}
-			people[userId].photo_large = photo_large;
-			l('User id'+userId + ' has photo_large=' + photo_large);
+			user.photo_large = photo_large;
 			callback(fieldName);
 		});
 	},
@@ -56,7 +55,7 @@
 			userId = user.id;
 		ServerApi.api('get_opinions', {'user_id':userId}, function(data) {
 			var r = data.response;
-			people[userId].opinions = r;
+			user.opinions = r;
 			callback(fieldName);
 		});
 	}
@@ -70,6 +69,8 @@
 		l('Queue moved forward');
 		l('About to process ' + (to - qIndex) + ' users');
 		function _callback(user) {
+			l('User id' + user.id + ' has photo_large=' + people[user.id].photo_large);
+			l('User id' + user.id + ' has question.text=' + people[user.id].question.text);
 			if(queue[qIndex]==user.id) {
 				emitEvent('mainready', people[user.id]);
 			}
