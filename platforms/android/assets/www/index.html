@@ -21,12 +21,12 @@
 				</div>
 			</div>
 			<ul>
-				<li class="active">Делись мнениями</li>
-				<li>Мнения обо мне</li>
-				<li>Друзья</li>
-				<li>Мои мнения</li>
-				<li>Магазин</li>
-				<li>Настройки</li>
+				<li id="nav_queue" class="active">Делись мнениями</li>
+				<li id="nav_about_me">Мнения обо мне</li>
+				<li id="nav_friends">Друзья</li>
+				<li id="nav_my_opinions">Мои мнения</li>
+				<li id="nav_store">Магазин</li>
+				<li id="nav_settings">Настройки</li>
 			</ul>
 		</div>
 		<div class="screens">
@@ -130,10 +130,14 @@
 			}
 
             //VK.auth('4147892', 'friends,photos', 'mobile', function() {
-            App.on('mainready', function(person) {
+            App.on('queueupdate', function(person) {
             	$('.question').text(person.question.text);
             	$('.photo').css('background-image', 'url(' + person.photo_large + ')');
-            				App.showProfile(197515742);
+            	$('.photo').off('click');
+            	$('.photo').on('click', function() {
+            		App.showProfile(person.id);
+            		showScreen('profile');
+            	});
             });
             App.on('menutoggle', function(isactive) {
             	if(isactive) {
@@ -141,6 +145,18 @@
             	} else {
 					$('.content-holder').animate({'left':'-87.91666666666667%'});
             	}
+            });
+            App.on('renderself', function(self) {
+            	l('rendering self');
+            	console.log(self);
+            	$('.profile-pic').find('img').attr('src', self.photo_200);
+            	$('.profile-name').find('h2').text(self.first_name + ' ' + self.last_name);
+            	$('.profile-name').on('click', function() {
+            		$('.menu').find('li').removeClass('active');
+            		App.showProfile(self.id);
+            		showScreen('profile');
+            		App.toggleMenu();
+            	});
             });
             App.on('renderprofile', function(profile) {
             	l('rendering profile for user with id = ' + profile.photo_200);
@@ -195,7 +211,15 @@
 			$('#button-next').on('click', function() {
 				App.next();
 			});
-			showScreen('profile');
+			$('.menu').find('li').on('click', function() {
+				var $this = $(this);
+				$this.parent().find('li').removeClass('active');
+				$this.addClass('active');
+			});
+			$('#nav_queue').on('click', function() {
+				showScreen('queue');
+				App.toggleMenu();
+			});
 
 		}
 

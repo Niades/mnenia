@@ -1,5 +1,7 @@
 (function() {
     'use strict';
+    //photo_200 is not returned when no userpic is available for this user
+    //use photo_200_orig instead
     var FRIENDS_FIELDS = "photo_50,photo_100,photo_200,sex,bdate,city",
         OWNER_FRIENDS_PARAMS = {
             "order" : "hints",
@@ -16,6 +18,9 @@
         },
         "getProfilePhotos" : function(userId, callback) {
             VK.api('photos.getProfile', {"owner_id" : userId}, callback);
+        },
+        "getSelfInfo" : function(callback) {
+            VK.api('users.get', {"fields":FRIENDS_FIELDS}, callback);
         }
         
     };

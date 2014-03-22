@@ -72,7 +72,7 @@
 			l('User id' + user.id + ' has photo_large=' + people[user.id].photo_large);
 			l('User id' + user.id + ' has question.text=' + people[user.id].question.text);
 			if(queue[qIndex]==user.id) {
-				emitEvent('mainready', people[user.id]);
+				emitEvent('queueupdate', people[user.id]);
 			}
 		}
 		for(var i=qIndex; i<to; i++) {
@@ -90,6 +90,11 @@
         },
 		initialize : function(userId) {
 			ServerApi.auth(userId, function() {
+				VKApi.getSelfInfo(function(data) {
+					 var self = data.response[0];
+					 people[self.id] = self;
+					 emitEvent('renderself', self);
+				});
 				VKApi.getFriends(function(data) {
 					var r = data.response,
 						length = r.count,
