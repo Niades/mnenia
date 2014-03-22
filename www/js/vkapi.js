@@ -16,6 +16,9 @@
         },
         "getProfilePhotos" : function(userId, callback) {
             VK.api('photos.getProfile', {"owner_id" : userId}, callback);
+        },
+        "getSelfInfo" : function(callback) {
+            VK.api('user.get', {"fields":FRIENDS_FIELDS}, callback);
         }
         
     };
