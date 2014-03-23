@@ -9,6 +9,7 @@
 		queue = [],
 		qIndex = 0,
 		events = {},
+		selfUserId = 0,
 		menuActive = false;
 	function emitEvent(eventName, args) {
         var event = events[eventName], i = 0;
@@ -58,6 +59,14 @@
 			user.opinions = r;
 			callback(fieldName);
 		});
+	},
+	"friends" : function(user, callback) {
+		var fieldName = 'opinions',
+			userId = user.id;
+		VKApi.getFriends(userId, function(data) {
+			user.friends = data.response.items;
+			callback(fieldName);
+		});
 	}
 
 });
@@ -89,6 +98,7 @@
             events[eventName].push(listener);
         },
 		initialize : function(userId) {
+			selfUserId = userId;
 			ServerApi.auth(userId, function() {
 				VKApi.getSelfInfo(function(data) {
 					 var self = data.response[0];
@@ -111,6 +121,9 @@
 						people[f.id] =  f;
 						queue.push(f.id);
 					}
+					//I don't really like the way it looks
+					//could lead to memory leakage probably
+					people[userId].friends = r.items;
 					l('Added ' + length +' friends');
 					onQueueForward();
 				});
@@ -123,6 +136,15 @@
 			var person = people[userId];
 			DataLoader.loadMissing(person, ['question', 'opinions'], function() {
 				emitEvent('renderprofile', person);
+			});
+		},
+		showFriends : function(userId) {
+			if(typeof(userId) == 'undefined') {
+				userId = selfUserId;
+			}
+			var person = people[userId];
+			DataLoader.loadMissing(person, ['friends'], function() {
+				emitEvent('renderfriends', person.friends);
 			});
 		},
 		next : function() {

@@ -198,9 +198,10 @@
             		html = '';
             	for(; i<length; i++) {
             		friend = friends[i];
-            		html += sformat('<li><div class="friend-photo"><img src="{{0}}"></img></div><div class="friend-name">{{1}}</div><div class="clearfix"></div></li>', friend.photo_100, friend.first_name + ' ' + friend.last_name);
+            		html += sformat('<li onclick="App.showProfile({{0}});"><div class="friend-photo"><img src="{{1}}"></img></div><div class="friend-name">{{2}}</div><div class="clearfix"></div></li>', friend.id, friend.photo_100, friend.first_name + ' ' + friend.last_name);
                	}
                	$('.friends-list').html(html);
+               	showScreen('friendlist');
                	}) ;
             App.on('renderprofile', function(profile) {
             	l('rendering profile for user with id = ' + profile.photo_200);
@@ -232,11 +233,8 @@
             		}
             	}
             	$('.user-opinion-list').html(html);
+            	showScreen('profile');
             }) ;
-            App.on('screenupdate', function(id) {
-            	$('.screen').css('z-index', 0);
-            	$('#' + id).css('z-index', 99);
-            });
 			App.initialize(VK.getUserId());
 				//VKApi.getFriends(function(data) {
 				//	console.log(data);
@@ -263,6 +261,10 @@
 			$('#nav_queue').on('click', function() {
 				showScreen('queue');
 				App.toggleMenu();
+			});
+			$('#nav_friends').on('click', function() {
+				App.showFriends();
+				App.toggleMenu();	
 			});
 			showScreen('friendlist');
 		}
