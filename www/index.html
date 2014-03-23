@@ -169,7 +169,6 @@
             	$('.photo').off('click');
             	$('.photo').on('click', function() {
             		App.showProfile(person.id);
-            		showScreen('profile');
             	});
             });
             App.on('menutoggle', function(isactive) {
@@ -186,11 +185,10 @@
             	$('.profile-name').on('click', function() {
             		$('.menu').find('li').removeClass('active');
             		App.showProfile(profile.id);
-            		showScreen('profile');
             		App.toggleMenu();
             	});
             });
-            App.on('renderfriends', function(friends) {
+            App.on('showfriends', function(friends) {
             	var i=0,
             		length = friends.length,
             		friend = null,
@@ -203,7 +201,7 @@
                	$('.friends-list').html(html);
                	showScreen('friendlist');
                	}) ;
-            App.on('renderprofile', function(profile) {
+            App.on('showprofile', function(profile) {
             	l('rendering profile for user with id = ' + profile.photo_200);
             	$('.user-pic').find('img').attr('src', profile.photo_200);
             	$('.user-info').find('h2').text(profile.first_name + ' ' + profile.last_name);
@@ -263,8 +261,9 @@
 				App.toggleMenu();
 			});
 			$('#nav_friends').on('click', function() {
-				App.showFriends();
-				App.toggleMenu();	
+				App.showFriends(function() {
+					App.toggleMenu();
+				});	
 			});
 			showScreen('friendlist');
 		}

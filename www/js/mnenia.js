@@ -132,19 +132,32 @@
 //		getCurrentPerson : function() {
 //			return
 //		},
-		showProfile : function(userId) {
+		showProfile : function(userId, callback) {
 			var person = people[userId];
 			DataLoader.loadMissing(person, ['question', 'opinions'], function() {
-				emitEvent('renderprofile', person);
+				emitEvent('showprofile', person);
+				//At this point all the event handlers have completed
+				//execution because their code contains nothing asynchronous 
+				if(typeof(callback)!='undefined') {
+					callback();
+				}
 			});
 		},
-		showFriends : function(userId) {
-			if(typeof(userId) == 'undefined') {
+		showFriends : function(userId, callback) {
+			if(typeof(userId) == 'undefined'||typeof(userId) == 'function') {
+				//This might be replaced with something more abstract like
+				//arguments[i] is not function nor undefined because with
+				//userId it seems sort of unclear what is really going on
+				//here
+				callback = userId;
 				userId = selfUserId;
 			}
 			var person = people[userId];
 			DataLoader.loadMissing(person, ['friends'], function() {
-				emitEvent('renderfriends', person.friends);
+				emitEvent('showfriends', person.friends);
+				if(typeof(callback)!='undefined') {
+					callback();
+				}
 			});
 		},
 		next : function() {
