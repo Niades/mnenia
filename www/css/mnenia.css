@@ -7,6 +7,16 @@ body, h1, h2 {
     overflow: hidden;
 }
 
+/*LIQUID AS SNAKE*/
+img {
+	max-width: 100%;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
 p {
 	margin: 1em 0;
 }
@@ -231,4 +241,59 @@ p {
 	bottom: 0.5em;
 	font-weight: bold;
 	color: #00ff00;
+}
+
+/* Friend list screen */
+
+.friends-search-bar-container1 {
+	background: #e7ebf0;
+	padding: 0.25em 0.5em;
+}
+
+.friends-search-bar-container2 {
+	border: 1px solid #dadada;
+	background: #ffffff;
+	padding: 0.1em;
+}
+
+.searchbar-icon {
+	display: inline-block;
+	width: 5%;
+	vertical-align: middle;
+	padding: 0.1em;
+}
+
+.searchbar-icon img {
+	max-width: 100%;
+}
+
+#friends-search-bar {
+	vertical-align: middle;
+	border: none;
+	width: 93%;
+	font-size: 1.318em;
+	font-weight: 300;
+}
+
+.friends-list {
+	padding: 0.25em 0.5em;
+}
+
+.friends-list li {
+	padding:  0.25em 0;
+	border-bottom: 1px solid #dadada;
+	cursor: pointer;
+}
+
+.friend-photo {
+	float: left;
+	width: 15.27777777777778%;
+	border-radius: 9999px;
+	overflow: hidden;
+}
+
+.friend-name {
+	float: left;
+	font-size: 1.5em;
+	padding: 0.75em;
 }

@@ -89,7 +89,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="screen queue">
+		<div id="queue" class="screen">
 			<div class="header">
 				<div class="header-left">
 					<div class="menu-button">
@@ -110,6 +110,39 @@
 				<div id="button-next" class="button">сук чё за хуила давай некст</div>
 			</div>
 		</div>
+		<div id="friendlist" class="screen">
+			<div class="header">
+				<div class="header-left">
+					<div class="menu-button">
+						☰
+					</div>
+				</div>
+				<div class="header-right">
+					$100
+				</div>
+			</div>
+			<div class="friends-search">
+				<div class="friends-search-bar-container1">
+					<div class="friends-search-bar-container2">
+						<div class="searchbar-icon">
+							<!--Replace me!-->
+							<img src="http://www.flamesofwar.com/Portals/0/all_images/Modelling/terrain/Cassino-Magnifying-Icon.jpg"></img>
+						</div>
+						<input id="friends-search-bar" placeholder="Поиск"/>
+					</div>
+				</div>
+				<ul class="friends-list">
+					<li>
+						<div class="friend-photo">
+							<img src="http://cs416928.vk.me/v416928742/90b4/LDvMv-Zaf7w.jpg"/>
+						</div>
+						<div class="friend-name">
+							Виталий Юпитеров
+						</div>
+						<div class="clearfix"></div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -220,7 +253,7 @@
 				showScreen('queue');
 				App.toggleMenu();
 			});
-
+			showScreen('friendlist');
 		}
 
 		function showScreen(id) {
