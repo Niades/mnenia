@@ -179,18 +179,29 @@
 					$('.content-holder').animate({'left':'-87.91666666666667%'});
             	}
             });
-            App.on('renderself', function(self) {
+            App.on('renderself', function(profile) {
             	l('rendering self');
-            	console.log(self);
-            	$('.profile-pic').find('img').attr('src', self.photo_200);
-            	$('.profile-name').find('h2').text(self.first_name + ' ' + self.last_name);
+            	$('.profile-pic').find('img').attr('src', profile.photo_200);
+            	$('.profile-name').find('h2').text(profile.first_name + ' ' + profile.last_name);
             	$('.profile-name').on('click', function() {
             		$('.menu').find('li').removeClass('active');
-            		App.showProfile(self.id);
+            		App.showProfile(profile.id);
             		showScreen('profile');
             		App.toggleMenu();
             	});
             });
+            App.on('renderfriends', function(friends) {
+            	var i=0,
+            		length = friends.length,
+            		friend = null,
+            		//ejs dude
+            		html = '';
+            	for(; i<length; i++) {
+            		friend = friends[i];
+            		html += sformat('<li><div class="friend-photo"><img src="{{0}}"></img></div><div class="friend-name">{{1}}</div><div class="clearfix"></div></li>', friend.photo_100, friend.first_name + ' ' + friend.last_name);
+               	}
+               	$('.friends-list').html(html);
+               	}) ;
             App.on('renderprofile', function(profile) {
             	l('rendering profile for user with id = ' + profile.photo_200);
             	$('.user-pic').find('img').attr('src', profile.photo_200);
