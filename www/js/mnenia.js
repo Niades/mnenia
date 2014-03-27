@@ -9,7 +9,7 @@
 		queue = [],
 		qIndex = 0,
 		events = {},
-		selfUserId = 0,
+		user = {},
 		menuActive = false;
 	function emitEvent(eventName, args) {
         var event = events[eventName], i = 0;
@@ -51,17 +51,17 @@
 			callback(fieldName);
 		});
 	},
-	"opinions" : function(user, callback) {
-		var fieldName = 'opinions',
+	"opinions_about" : function(user, callback) {
+		var fieldName = 'opinions_about',
 			userId = user.id;
-		ServerApi.api('get_opinions', {'user_id':userId}, function(data) {
+		ServerApi.api('get_opinions_about', { 'user_id' : userId }, function(data) {
 			var r = data.response;
 			user.opinions = r;
 			callback(fieldName);
 		});
 	},
 	"friends" : function(user, callback) {
-		var fieldName = 'opinions',
+		var fieldName = 'friends',
 			userId = user.id;
 		VKApi.getFriends(userId, function(data) {
 			user.friends = data.response.items;
@@ -87,7 +87,7 @@
 		for(var i=qIndex; i<to; i++) {
 			personId = queue[i];
 			l('Current user: ' + personId);
-			DataLoader.loadMissing(people[personId], ['question', 'photo_large', 'opinions'], _callback);
+			DataLoader.loadMissing(people[personId], ['question', 'photo_large'], _callback);
 		}
 	}
 	var App = {
@@ -98,15 +98,15 @@
             events[eventName].push(listener);
         },
 		initialize : function(userId) {
-			selfUserId = userId;
+			user.id = userId;
 			ServerApi.auth(userId, function() {
 				VKApi.getSelfInfo(function(data) {
-					 var self = data.response[0];
-					 if(typeof(self.photo_200)=='undefined') {
-					 	self.photo_200 = self.photo_200_orig;
+					 user = data.response[0];
+					 if(typeof(user.photo_200)=='undefined') {
+					 	user.photo_200 = user.photo_200_orig;
 					 }
-					 people[self.id] = self;
-					 emitEvent('renderself', self);
+					 people[user.id] = user;
+					 emitEvent('renderself', user);
 				});
 				VKApi.getFriends(function(data) {
 					var r = data.response,
@@ -127,6 +127,9 @@
 					l('Added ' + length +' friends');
 					onQueueForward();
 				});
+				ServerApi.api('get_opinions_by', {}, function(data) {
+					user.opinions_by = data.response;
+				});
 			});
 		},
 //		getCurrentPerson : function() {
@@ -134,7 +137,7 @@
 //		},
 		showProfile : function(userId, callback) {
 			var person = people[userId];
-			DataLoader.loadMissing(person, ['question', 'opinions'], function() {
+			DataLoader.loadMissing(person, ['question', 'opinions_about'], function() {
 				emitEvent('showprofile', person);
 				//At this point all the event handlers have completed
 				//execution because their code contains nothing asynchronous 
@@ -150,7 +153,7 @@
 				//userId it seems sort of unclear what is really going on
 				//here
 				callback = userId;
-				userId = selfUserId;
+				userId = user.id;
 			}
 			var person = people[userId];
 			DataLoader.loadMissing(person, ['friends'], function() {
@@ -159,6 +162,9 @@
 					callback();
 				}
 			});
+		},
+		showMyOpinions : function(callback) {
+
 		},
 		next : function() {
 			qIndex += 1;
@@ -180,6 +186,7 @@
 			});
 		},
 		toggleMenu : function() {
+			//Update notification counters
 			//updateMenu();
 			menuActive = !menuActive;
 			emitEvent('menutoggle', menuActive);
