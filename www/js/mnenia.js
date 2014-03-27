@@ -169,6 +169,9 @@
 				opinion = null,
 				opinions = user.opinions_by.items,
 				length = opinions.length,
+				//Here's the catch: this might contain some users which are not presented
+				//in our nice people object, but at it's current state the application doesn't
+				//allow you to browse not your friends' profiles, so this is not an issue, yet
 				e = {
 					"users" : {},
 					"opinions" : []

@@ -198,8 +198,32 @@
             	$('.user-info').find('h2').text(profile.first_name + ' ' + profile.last_name);
             	$('.user-question').text(profile.question.text);
             	$('.user-opinions-count').html(sformat('<strong>{{0}}</strong> мнений', profile.opinions.count));
+            	//First of all we should make our opinions object look like
+            	//Question --+--Opinion
+            	//           +--Opinion
+            	//           +--Opinion
+            	//...
+            	//Not 
+            	//Opinion--+--Question.ID
+            	//         +--Question.Text
+            	//Opinion--+--Question.ID
+            	//         +--Question.Text
+            	//...
+            	var ops = {};
+            	for(var i=0; i<profile.opinions.items.length; i++) {
+            		var opinion = profile.opinions.items[i];
+            		if(typeof(ops[opinion.question_id])=='undefined') {
+            			ops[opinion.question_id] = {
+            				"id" : opinion.question_id,
+            				"text" : opinion.question_text,
+            				"opinions" : []
+            			};
+            		}
+            		ops[opinion.question_id]['opinions'].push(opinion);
+            	}
+
             	//This seemss like overoptimized to me
-            	var questions = profile.opinions.items,
+            	var questions = ops,
             		question = null,
             		opinions = null,
             		opinion = null,
