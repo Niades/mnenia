@@ -288,12 +288,63 @@ p {
 .friend-photo {
 	float: left;
 	width: 15.27777777777778%;
-	border-radius: 9999px;
 	overflow: hidden;
+}
+
+.friend-photo img {
+	border-radius: 9999px;
 }
 
 .friend-name {
 	float: left;
 	font-size: 1.5em;
 	padding: 0.75em;
+}
+
+/* My opinions screen */
+
+.my-opinions-count p {
+	font-size: 1.2em;
+	color: #c5c5c5;
+}
+
+.my-opinions-count strong {
+	color: #000;
+}
+
+.my-opinions-list li {
+	display: block;
+	padding: 1em;
+	border-bottom: 1px solid #dadada;
+}
+
+.my-opinion-left {
+	float: left;
+	width: 18.86111111111111%;
+	padding-right: 1em;
+}
+
+.my-opinion-userpic {
+	display: inline-block;
+	width: 100%;
+}
+
+.my-opinion-userpic {
+	border-radius: 9999px;
+	overflow: hidden;
+}
+
+.my-opinion-unlocked {
+	font-size: 0.7em;
+}
+
+.my-opinion-question {
+	display: block;
+	font-weight: bold;
+}
+
+.my-opinion-main p {
+	font-size: 1em;
+	margin: 1em 0.3em;
+	text-align: justify;
 }

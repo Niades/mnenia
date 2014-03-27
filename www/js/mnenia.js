@@ -107,8 +107,7 @@
 					 }
 					 people[user.id] = user;
 					 emitEvent('renderself', user);
-				});
-				VKApi.getFriends(function(data) {
+					 				VKApi.getFriends(function(data) {
 					var r = data.response,
 						length = r.count,
 					    f = null,
@@ -130,6 +129,8 @@
 				ServerApi.api('get_opinions_by', {}, function(data) {
 					user.opinions_by = data.response;
 				});
+				});
+
 			});
 		},
 //		getCurrentPerson : function() {
@@ -164,7 +165,25 @@
 			});
 		},
 		showMyOpinions : function(callback) {
-
+			var i = 0,
+				opinion = null,
+				opinions = user.opinions_by.items,
+				length = opinions.length,
+				e = {
+					"users" : {},
+					"opinions" : []
+				},
+				ops = e.opinions,
+				users = e.users;
+			for (; i<length; i++) {
+				opinion = opinions[i];
+				ops.push(opinion);
+				e.users[opinion.about_uid] = people[opinion.about_uid];
+			}
+			emitEvent('showmyopinions', e);
+			if(typeof(callback)!='undefined') {
+				callback();
+			}	
 		},
 		next : function() {
 			qIndex += 1;
