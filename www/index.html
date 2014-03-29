@@ -107,7 +107,8 @@
 					<div class="friends-search-bar-container2">
 						<div class="searchbar-icon">
 							<!--Replace me!-->
-							<img src="http://www.flamesofwar.com/Portals/0/all_images/Modelling/terrain/Cassino-Magnifying-Icon.jpg"></img>
+							<!--Ok now you just gotta add something here-->
+							<!--<img src="http://www.flamesofwar.com/Portals/0/all_images/Modelling/terrain/Cassino-Magnifying-Icon.jpg"></img>-->
 						</div>
 						<input id="friends-search-bar" placeholder="Поиск"/>
 					</div>
@@ -132,8 +133,51 @@
 			</div>
 			<div class="separator"></div>
 			<ul class="my-opinions-list">
-
 			</ul>
+		</div>
+		<div id="opinions_about_me" class="screen">
+			<div class="header">
+				<div class="header-left">
+					<div class="menu-button">
+						☰
+					</div>
+				</div>
+				<div class="header-right">
+					$100
+				</div>
+			</div>
+			<div class="locked-opinions">
+				<div class="opinions-new-title">
+					Новые
+				</div>
+				<ul class="locked-opinions-list">
+					<li>
+						<div class="opinion-info">
+							<img/>
+							<span>1.1.1970</span>
+						</div><span>Посмотреть за $300</span><div class="opinion-lock">
+							<img/>
+						</div>
+						<div class="clearfix"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="about-unlocked-opinions">
+				<div class="opinion-question">
+					Как твои деляны?
+				</div>
+				<ul class="unlocked-opinions-list">
+					<li>
+						<div class="opinion-info">
+							<img/>
+							<span>1.1.1970</span>
+						</div>
+						<div class="opinion-body">
+							<p>Ну так-то ты неплохой парень конечно но может и нет, я не знаю. Вообще иногда я хочу взять монтировку и разбить ей тебе ебальник, вот так сильно ты иногда меня бесишь, но на самом деле, ты мне очень нравишься, хотя и можешь раздражать меня порой. Удачи тебе во всех твоих начинаниях.</p>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -259,12 +303,12 @@
 				    l(length + ' opinions ');
 				for(; i<length; i++) {
 					opinion = opinions[i];
-					html += sformat('<li><div class="my-opinion-left"><div class="my-opinion-userpic"><img src="{{0}}" /></div><span class="my-opinion-unlocked">Просмотрено</span></div><div class="my-opinion-main"><span class="my-opinion-question">{{1}}</span><p>{{2}}</p></div><div class="clearfix"></div></li>', users[opinion.about_uid].photo_100, opinion.question_text, opinion.text);
+					html += sformat('<li><div class="my-opinion-left"><div class="my-opinion-userpic"><img src="{{0}}" /></div><span class="my-opinion-unlocked">Затролено</span></div><div class="my-opinion-main"><span class="my-opinion-question">{{1}}</span><p>{{2}}</p></div><div class="clearfix"></div></li>', users[opinion.about_uid].photo_100, opinion.question_text, opinion.text);
 				}
 				$('.my-opinions-list').html(html);
 			});
 			//Showing queue by default
-			showScreen('queue');
+			showScreen('opinions_about_me');
 	
 			App.initialize(VK.getUserId());
 				//VKApi.getFriends(function(data) {
