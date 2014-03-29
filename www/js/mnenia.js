@@ -201,9 +201,10 @@
 				qIndex = queue.length - 1;
 			}
 		},
-		submitOpinion : function(text) {
-			var person = people[queue[qIndex]];
-			ServerApi.api('submit_opinion', {"qid" : person.question.id, "text" : text, "user_id" : person.id }, function() {
+		submitOpinion : function(userId, text, character) {
+			//var person = people[queue[qIndex]];
+			var person = people[userId];
+			ServerApi.api('submit_opinion', {"qid" : person.question.id, "text" : text, "user_id" : person.id, "character" : character }, function() {
 				l('opinion submitted.');
 			});
 		},

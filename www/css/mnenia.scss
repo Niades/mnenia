@@ -5,6 +5,7 @@ $outline : #dadada;
 /* MIXINS */
 
 //Rounded (mostly images)
+
 @mixin rounded {
 	border-radius: 9999px;
 	overflow: hidden;
@@ -41,6 +42,7 @@ body, h1, h2 {
     overflow: hidden;
 }
 
+
 /*LIQUID AS SNAKE*/
 img {
 	max-width: 100%;
@@ -53,6 +55,10 @@ ul {
 
 p {
 	margin: 1em 0;
+}
+
+.clickable {
+	cursor: pointer;
 }
 
 .content-holder {
@@ -109,22 +115,89 @@ p {
 	background: #5580B5;
 	color: #ffffff;
 	font-size: 1em;
-}
 
-.header-left {
-	position: absolute;
-	left: 1em;
-	top: 1em;
-}
+	.header-left {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+	}
 
-.header-right {
-	position: absolute;
-	right: 1em;
-	top: 1em;
-}
+	.header-right {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+	}
 
-.menu-button {
-	cursor: pointer;
+	.menu-button {
+		padding: 1em 1em;
+		cursor: pointer;
+	}
+
+	.balance {
+		display: block;
+		padding: 1em 1em;
+	}
+
+}
+/* Send opinion */
+
+#send {
+
+	.active {
+		box-shadow: 0px 0px 10px #000;
+	}
+
+	.send-button {
+		cursor: pointer;
+		padding: 1em 1em;
+	}
+
+	.opinion-text {
+		height: 84.375%;
+		max-height: 100%;
+		textarea {
+			resize: none;
+			width: 100%;
+			height: 100%;
+			padding: 0.25em;
+			margin: 0;
+			border: none;
+		}
+	}
+
+	.select-character {
+		@include bordered(top);
+		position: absolute;
+		bottom: 0;
+		height: 15.625%;
+		width: 100%;
+
+		.select-title {
+			padding: 0.5em 0;
+		}
+
+		.characters {
+			height: 80%;
+			.character-negative {
+				background: #ff0000;
+			}
+			.character-positive {
+				background: #00ff00;
+			}
+			.character-neutral {
+				background: #dadada;
+			}
+
+			li {
+				display: inline-block;
+				width: 32.333333333%;
+				height: 100%;
+				cursor: pointer;
+			}
+		}
+	}
 }
 
 /* Queue screen */
