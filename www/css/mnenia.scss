@@ -1,3 +1,30 @@
+/* DESIGN VARIABLES */
+
+$outline : #dadada;
+
+/* MIXINS */
+
+//Rounded (mostly images)
+@mixin rounded {
+	border-radius: 9999px;
+	overflow: hidden;
+}
+
+@mixin bordered($type) {
+	@if $type == bottom or $type == top or $type == left or $type == right {
+		border-#{$type}: 1px solid $outline;
+	} @else {
+		border: 1px solide $outline;
+	} 
+}
+
+@mixin title($color) {
+	display: block;
+	border-bottom: 1px solid $outline;
+	padding: 0.4em;
+	color: $color;
+}
+
 /* Common */
 
 body, h1, h2 {
@@ -150,8 +177,7 @@ p {
 	overflow: hidden;
 }
 .profile-pic img {
-	max-width: 100%;
-	border-radius: 9999px;
+	@include rounded;
 }
 
 .profile-name {
@@ -167,80 +193,82 @@ p {
 
 /* Profile screen */
 
-.user-info {
-	padding: 1em;
-}
+#profile {
 
-.user-info h2 {
-	margin-top: 1em;
-}
+	.user-info {
+		padding: 1em;
+	}
 
-.user-pic {
-	margin: 0 auto;
-	width: 27.77777777777778%;
-}
+	.user-info h2 {
+		margin-top: 1em;
+	}
 
-.user-pic img {
-	max-width: 100%;
-}
+	.user-pic {
+		margin: 0 auto;
+		width: 27.77777777777778%;
+	}
 
-.user-question {
-	padding: 0.5em;
-}
+	.user-pic img {
+		max-width: 100%;
+	}
 
-.user-opinions-info {
-	padding: 0.5em;
-}
+	.user-question {
+		padding: 0.5em;
+	}
 
-.user-opinions-count {
-	float: left;
-}
+	.user-opinions-info {
+		padding: 0.5em;
+	}
 
-.user-opinions-character {
-	float: right;
-}
+	.user-opinions-count {
+		float: left;
+	}
 
-.user-opinions-character div {
-	display: inline-block;
-}
+	.user-opinions-character {
+		float: right;
+	}
 
-.positive-opinions strong {
-	color: #00ff00;
-}
+	.user-opinions-character div {
+		display: inline-block;
+	}
 
-.negative-opinions strong {
-	color: #ff0000;
-}
+	.positive-opinions strong {
+		color: #00ff00;
+	}
 
-.opinion-question {
-	text-align: left;
-	padding: 0 0.5em;
+	.negative-opinions strong {
+		color: #ff0000;
+	}
 
-}
+	.opinion-question {
+		text-align: left;
+		padding: 0 0.5em;
 
-.opinion-question span {
-	display: block;
-	color: #9f9f9f;
-	margin: 0.25em;
-}
+	}
 
-.opinion {
-	border-top: 1px solid #dadada;
-	position: relative;
-	padding: 0 0.5em 0.5em 0;
-}
+	.opinion-question span {
+		@include title(#9f9f9f);
+	}
 
-.opinion p {
-	text-align: justify;
-	text-indent: 1em;
-}
+	.opinion {
+		@include bordered(top);
+		position: relative;
+		padding: 0 0.5em 0.5em 0;
+	}
 
-.opinion-character {
-	position: absolute;
-	right: 0.5em;
-	bottom: 0.5em;
-	font-weight: bold;
-	color: #00ff00;
+	.opinion p {
+		text-align: justify;
+		text-indent: 1em;
+	}
+
+	.opinion-character {
+		position: absolute;
+		right: 0.5em;
+		bottom: 0.5em;
+		font-weight: bold;
+		color: #00ff00;
+	}
+
 }
 
 /* Friend list screen */
@@ -251,7 +279,7 @@ p {
 }
 
 .friends-search-bar-container2 {
-	border: 1px solid #dadada;
+	@include bordered(all);
 	background: #ffffff;
 	padding: 0.1em;
 }
@@ -280,8 +308,8 @@ p {
 }
 
 .friends-list li {
+	@include bordered(bottom);
 	padding:  0.25em 0;
-	border-bottom: 1px solid #dadada;
 	cursor: pointer;
 }
 
@@ -292,7 +320,7 @@ p {
 }
 
 .friend-photo img {
-	border-radius: 9999px;
+	@include rounded;
 }
 
 .friend-name {
@@ -313,9 +341,9 @@ p {
 }
 
 .my-opinions-list li {
+	@include bordered(bottom);
 	display: block;
 	padding: 1em;
-	border-bottom: 1px solid #dadada;
 }
 
 .my-opinion-left {
@@ -330,8 +358,7 @@ p {
 }
 
 .my-opinion-userpic {
-	border-radius: 9999px;
-	overflow: hidden;
+	@include rounded;
 }
 
 .my-opinion-unlocked {
@@ -347,4 +374,81 @@ p {
 	font-size: 1em;
 	margin: 1em 0.3em;
 	text-align: justify;
+}
+
+/* Opinions about me screen */
+
+#opinions_about_me {
+
+	.opinions-new-title {
+		@include title(#ff0000);
+	}
+
+	.opinion-info {
+		vertical-align: middle;
+		display: inline-block;
+
+		width: 20.83333333333333%;
+
+		img {
+			width: 100%;
+			height: 100px;
+			background: #00ff00;
+		}
+	}
+
+
+	.locked-opinions {
+		.locked-opinions-list {
+			li {
+				@include bordered(bottom);
+				padding: 0.25em;
+			}
+
+			span {
+				display: inline-block;
+				vertical-align: middle;
+				width: 58.33333333333333%;
+			}
+
+			.opinion-lock {
+				vertical-align: middle;
+				display: inline-block;
+
+				width: 20.83333333333333%;
+
+				img {
+					width: 100%;
+					height: 100px;
+					background: #cacaca;
+				}
+			}
+		}   
+    }
+
+	.opinion-question {
+		@include title(#9f9f9f);
+	}
+
+	.unlocked-opinions-list {
+		 li {
+			@include bordered(bottom);
+			padding: 0.25em;
+			.opinion-body {
+				display: inline-block;
+				max-width: 78.16666666666667%;
+				
+				vertical-align: middle;
+				p {
+					text-align: justify;
+					text-indent: 1em;	
+				}
+
+				span {
+					display: block;
+					font-weight: bold;
+				}
+			}
+		}
+	}
 }
