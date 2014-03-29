@@ -27,6 +27,13 @@ $outline : #dadada;
 
 /* Common */
 
+body {
+	position: absolute;
+	bottom: 0;
+	top: 0;
+	width: 100%;
+}
+
 body, h1, h2 {
     text-align: center;
     font-family: sans-serif;
@@ -52,12 +59,12 @@ p {
 	position: absolute;
 	width: 187.91666666666667%;
 	left: -87.91666666666667%;
-
+	height: 100%;
 }
 .screens {
 	position: relative;
 	overflow: hidden;
-	height: 1000px;
+	height: 100%;
 	/*Something bad happens here*/
 	width: 53.21507760532151%;
 	margin-left: 46.78492239467849%;
@@ -78,6 +85,7 @@ p {
 	width: 46.78492239467849%;
 	color: #fff;
 	background: #000;
+	height: 100%;
 }
 
 .separator {
@@ -136,6 +144,15 @@ p {
     margin: 5px;
 }
 
+#button-submit {
+	max-width: 100%;
+	cursor: pointer;
+	padding: .3em;
+	font-size: 1.3em;
+	color: white;
+	background: #5580B5;
+}
+/*
 .button {
     display: inline;
     padding: 3px 5px;
@@ -143,7 +160,7 @@ p {
     margin: 5px;
     cursor: pointer;
 }
-
+*/
 /* Menu */
 
 .menu ul {
