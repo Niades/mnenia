@@ -530,6 +530,10 @@ p {
 
 		width: 20.83333333333333%;
 
+		span {
+			width: auto !important;
+		}
+
 		img {
 			width: 100%;
 			height: 100px;
@@ -544,18 +548,17 @@ p {
 				@include bordered(bottom);
 				padding: 0.25em;
 			}
-
 			span {
 				display: inline-block;
 				vertical-align: middle;
-				width: 58.33333333333333%;
+				width: 58%;
 			}
 
 			.opinion-lock {
 				vertical-align: middle;
 				display: inline-block;
 
-				width: 20.83333333333333%;
+				width: 20%;
 
 				img {
 					width: 100%;

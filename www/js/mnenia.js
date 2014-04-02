@@ -6,6 +6,7 @@
 	var PRELOAD = 3;
 	
 	var people = {},
+		questions = {},
 		queue = [],
 		qIndex = 0,
 		events = {},
@@ -26,8 +27,8 @@
     		    userId = user.id;
     		ServerApi.api('get_question', {'user_id':userId}, function(data) {
     			var r = data.response;
+    			questions[r.id] = r;
     			user.question = {'id' : r.id, 'text' : r.text};
-
 				callback(fieldName);
     		});
     	},
@@ -56,7 +57,31 @@
 			userId = user.id;
 		ServerApi.api('get_opinions_about', { 'user_id' : userId }, function(data) {
 			var r = data.response;
-			user.opinions = r;
+			user.opinions = r.items;
+			user.total = r.total;
+			user.positive = r.positive;
+			user.negative = r.negative;
+			for(var i in r.questions) {
+				if(typeof(r.questions[i])!='function') {
+					questions[r.questions[i].id] = r.questions[i];
+				}
+			}
+			callback(fieldName);
+		});
+	},
+	"opinions_about_me" : function(user, callback) {
+		var fieldName = 'opinions_about_me';
+		ServerApi.api('get_opinions_about', {}, function(data) {
+			var r = data.response;
+			user.opinions = r.items;
+			user.total = r.total;
+			user.positive = r.positive;
+			user.negative = r.negative;
+			for(var i in r.questions) {
+				if(typeof(r.questions[i])!='function') {
+					questions[r.questions[i].id] = r.questions[i];
+				}
+			}
 			callback(fieldName);
 		});
 	},
@@ -139,7 +164,21 @@
 		showProfile : function(userId, callback) {
 			var person = people[userId];
 			DataLoader.loadMissing(person, ['question', 'opinions_about'], function() {
-				emitEvent('showprofile', person);
+				var e = {
+					"user" : person,
+					"questions" : {},
+					"opinions" : []
+				}
+				for(var i in person.opinions) {
+					if(typeof(person.opinions[i])!='undefined') {
+						var opinion = person.opinions[i];
+						e.opinions.push(opinion);
+						if(typeof(e.questions[opinion.qid])=='undefined') {
+							e.questions[opinion.qid] = questions[opinion.qid];
+						}
+					}
+				}
+				emitEvent('showprofile', e);
 				//At this point all the event handlers have completed
 				//execution because their code contains nothing asynchronous 
 				if(typeof(callback)!='undefined') {
@@ -188,7 +227,37 @@
 				callback();
 			}	
 		},
-		next : function() {
+		showOpinionsAboutMe : function(callback){
+				DataLoader.loadMissing(user, ['opinions_about_me'], function() {
+					var i = 0,
+						opinion = null,
+						opinions = user.opinions,
+						length = opinions.length,
+						//Here's the catch: this might contain some users which are not presented
+						//in our nice people object, but at it's current state the application doesn't
+						//allow you to browse not your friends' profiles, so this is not an issue, yet
+						e = {
+							"users" : {},
+							"opinions" : [],
+							"questions" : {}
+						},
+						ops = e.opinions,
+						users = e.users;
+					for (; i<length; i++) {
+						opinion = opinions[i];
+						ops.push(opinion);
+						e.users[opinion.about_uid] = people[opinion.about_uid];
+						if(typeof(e.questions[opinion.qid])=='undefined') {
+							e.questions[opinion.qid] = questions[opinion.qid];
+						}
+					}
+					emitEvent('showopinionsaboutme', e);
+					if(typeof(callback)!='undefined') {
+						callback();
+					}
+			});
+		},
+ 		next : function() {
 			qIndex += 1;
 			if(qIndex >= queue.length) {
 				qIndex = 0;
