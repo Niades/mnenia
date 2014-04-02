@@ -54,10 +54,10 @@
 				<div class="user-opinions-info">
 					<div class="user-opinions-count"> </div>
 					<div class="user-opinions-character">
-						<div class="positive-opinions">
+						<div id="profile-positive-count" class="positive-opinions">
 							<strong>:)</strong> 25
 						</div>
-						<div class="negative-opinions">
+						<div id="profile-negative-count" class="negative-opinions">
 							<strong>:(</strong> 1
 						</div>
 					</div>
@@ -274,11 +274,13 @@
             	$('.user-pic').find('img').attr('src', profile.photo_200);
             	$('.user-info').find('h2').text(profile.first_name + ' ' + profile.last_name);
             	$('.user-question').text(profile.question.text);
-            	$('.user-opinions-count').html(sformat('<strong>{{0}}</strong> мнений', profile.opinions.count));
+            	$('.user-opinions-count').html(sformat('<strong>{{0}}</strong> мнений', profile.opinions.total));
+            	$('#profile-positive-count').html(sformat('<strong>:)</strong> {{0}}', profile.opinions.positive));
+            	$('#profile-negative-count').html(sformat('<strong>:(</strong> {{0}}', profile.opinions.negative));
             	//First of all we should make our opinions object look like
-            	//Question --+--Opinion
-            	//           +--Opinion
-            	//           +--Opinion
+            	//Question--+--Opinion
+            	//          +--Opinion
+            	//          +--Opinion
             	//...
             	//Not 
             	//Opinion--+--Question.ID
@@ -316,7 +318,15 @@
             				if(typeof(opinions[j])!='function') {
             					opinion = opinions[j];
             					//same 
-            					html += sformat('<div class="opinion"><div class="opinion-character">:)</div><p>{{0}}</p></div>', opinion.text);
+            					html += sformat('<div class="opinion"><div class="opinion-character">{{1}}</div>{{0}}</div>', opinion.text, (function(character){
+            						if(character==1) {
+            							return '<p class="positive">:)</p>';
+            						} else if (character==0) {
+            							return '<p class="neutral">:|</p>';
+            						} else if(character == -1) {
+            							return '<p class="negative">:(</p>';
+            						}
+            					})(opinion.character));
             				}
             			}
             			html += '</div>';
@@ -333,10 +343,19 @@
 				    opinions = e.opinions,
 				    users = e.users,
 				    length = opinions.length;
-				    l(length + ' opinions ');
+				l(length + ' opinions ');
+				$('.my-opinions-count').find('p').find('strong').html(length);
 				for(; i<length; i++) {
 					opinion = opinions[i];
-					html += sformat('<li><div class="my-opinion-left"><div class="my-opinion-userpic"><img src="{{0}}" /></div><span class="my-opinion-unlocked">Затролено</span></div><div class="my-opinion-main"><span class="my-opinion-question">{{1}}</span><p>{{2}}</p></div><div class="clearfix"></div></li>', users[opinion.about_uid].photo_100, opinion.question_text, opinion.text);
+					html += sformat('<li><div class="opinion-character">{{4}}</div><div class="my-opinion-left"><div class="my-opinion-userpic"><img src="{{0}}" /></div><span class="my-opinion-unlocked">{{3}}</span></div><div class="my-opinion-main"><span class="my-opinion-question">{{1}}</span><p>{{2}}</p></div><div class="clearfix"></div></li>', users[opinion.about_uid].photo_100, opinion.question_text, opinion.text, opinion.unlocked ? 'Просмотрено' : 'Не просмотрено', (function(character){
+            						if(character==1) {
+            							return '<p class="positive">:)</p>';
+            						} else if (character==0) {
+            							return '<p class="neutral">:|</p>';
+            						} else if(character == -1) {
+            							return '<p class="negative">:(</p>';
+            						}
+            					})(opinion.character));
 				}
 				$('.my-opinions-list').html(html);
 			});
