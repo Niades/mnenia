@@ -541,12 +541,32 @@ p {
 		}
 	}
 
+	.opinion-body {
+		display: inline-block;
+		width: 78.16666666666667%;
+		
+		vertical-align: middle;
+		p {
+			text-align: justify;
+			text-indent: 1em;	
+		}
+
+		span {
+			display: block;
+			font-weight: bold;
+		}
+	}
+
+
+	li {
+		@include bordered(bottom);
+		padding: 0.25em;
+	}
 
 	.locked-opinions {
 		.locked-opinions-list {
-			li {
-				@include bordered(bottom);
-				padding: 0.25em;
+			.opinion-item-locked {
+				cursor: pointer;
 			}
 			span {
 				display: inline-block;
@@ -573,25 +593,4 @@ p {
 		@include title(#9f9f9f);
 	}
 
-	.unlocked-opinions-list {
-		 li {
-			@include bordered(bottom);
-			padding: 0.25em;
-			.opinion-body {
-				display: inline-block;
-				max-width: 78.16666666666667%;
-				
-				vertical-align: middle;
-				p {
-					text-align: justify;
-					text-indent: 1em;	
-				}
-
-				span {
-					display: block;
-					font-weight: bold;
-				}
-			}
-		}
-	}
 }

@@ -179,15 +179,15 @@
                                                         </div>', question.id, question.text));
                             $cont = $('#uquestion'+question.id);
                         }
-                        $cont.find('ul').append(sformat('<li>\
+                        $cont.find('ul').append(sformat('<li class="opinion-item" id="opinion_{{0}}">\
                                                     <div class="opinion-info">\
                                                         <img/>\
-                                                        <span>{{0}}</span>\
+                                                        <span>{{1}}</span>\
                                                      </div>\
                                                      <div class="opinion-body">\
-                                                        <p>{{1}}</p>\
+                                                        <p>{{2}}</p>\
                                                      </div>\
-                                                </li>', opinion.time, opinion.text));
+                                                </li>', opinion.id, opinion.time, opinion.text));
                     } else {
                         $cont = $lockedOps.find('#lquestion' + opinion.qid);
                         if($cont.length == 0) {
@@ -201,17 +201,34 @@
                                                        </div>', question.id, question.text));
                             $cont = $lockedOps.find('#lquestion' + opinion.qid);
                         } 
-                        $cont.find('ul').append(sformat('<li>\
+                        $cont.find('ul').append(sformat('<li class="opinion-item-locked" id="opinion_{{0}}">\
                                                             <div class="opinion-info">\
                                                                 <img/>\
-                                                                <span>{{0}}</span>\
+                                                                <span>{{1}}</span>\
                                                             </div><span>Посмотреть за $300</span>\
                                                             <div class="opinion-lock">\
                                                                 <img/>\
                                                             </div><div class="clearfix"></div>\
-                                                         </li>', opinion.time));
+                                                         </li>', opinion.id, opinion.time));
                     }
                 }
+                $('.opinion-item-locked').off('click').on('click', function() {
+                    $this = $(this);
+                    var id = $this.attr('id').match(/opinion_([0-9]*)/)[1];
+                    App.unlockOpinion(id, function(opinion) {
+                        $this.off('click').removeClass('opinion-item-locked').html(sformat('\
+                                                     <div class="opinion-info">\
+                                                        <img/>\
+                                                        <span>{{0}}</span>\
+                                                     </div>\
+                                                     <div class="opinion-body">\
+                                                        <p>{{1}}</p>\
+                                                     </div>', opinion.time, opinion.text));
+                        alert('Done');
+                    }, function(error) {
+                        alert(error.message);
+                    });
+                })
             });
             //Showing queue by default
             showScreen('queue');
